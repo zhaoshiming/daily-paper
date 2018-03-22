@@ -92,4 +92,68 @@ parseFloat() 转浮点数
 
 ##对象找到了吗？ 
 
+查看对象的全部属性
+let obj = {name: 'tomas'};
+Object.keys(obj); // 会返回一个包含全部键值的数组
+
+遍历对象的全部属性
+Object.keys(obj).map(res=>{
+    console.log(obj['res']);
+})
+for (var a in obj) {    // 会跳过不可遍历的属性，会便利继承的属性
+    console.log(obj[a]);
+}
+
+for (let a in fuckName) {
+    if (fuckName.hasOwnProperty(a)) {
+        console.log('这里确保遍历的是自身的属性，而不包含继承来的属性');
+    }
+}
+
+##闭包
+
+其实是因为没有块级作用域，所以现在es6 已经有了，这个不需要了解
+
+function bag() {
+    var a = 1;
+    function getA() {
+        return a;
+    }
+    return getA;
+}
+
+var cc = bag();
+cc(); // 1
+
+
+##函数的运算符部分
+
+首先你需要明白，运算符是针对数字进行运算的，所以一些string会插进来，本身就是不符合逻辑的。
+
++ 法   // 加法会出现很多的问题， 因为除了加法以外，都会自动转为数字进行运算
+
+对象相加  （sb） 会先调用 valueOf() 再调用toString() 
+
+显式类型转换
+Number(12)  == 12
+Number('12')  == 12
+Number(true)  == 1
+Number('asd')   == NaN
+Number('12asd')  == NaN     // 有一个字母都不行 区别于parseInt()
+Number(undefined)  == NaN 
+Number(null)   == 0
+
+Number(对象)  // 会先调用valueOf () 如果返回的不是原始类型的值， 会调用 toString() 
+
+String(对象)   //会先调用toString () 如果返回的不是原始类型的值， 会调用 valueOf() 
+   
+Boolean()  //转的时候就是会转为false的那几个， 其他的都会转化为true
+
+
+
+
+
+
+
+
 
