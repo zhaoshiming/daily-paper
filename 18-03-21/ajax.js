@@ -46,9 +46,9 @@ if (window.XMLHttpRequest){
 }
 
 ser.open(type,url,false);
+// 设置头信息 Content-type
 ser.setRequestHeader('Content-type','application/x-www-form-urlencoded')
-// get 需要发送的信息都在URL上
-ser.send(null);
+// get 需要发送的信息都在URL上 但是post请求是 ser.send(postDate)进行传输的
 // onreadystatechange 该属性允许一个回调函数
 ser.onreadystatechange = () => {
 	// 判断readyState   http就绪状态 4表示相应已经完成
@@ -63,8 +63,50 @@ ser.onreadystatechange = () => {
 		console.log('serve side err');
 	}
 }
+ser.send(null);
 
 // 一些状态码
 301 永久移动
 302 找到 但是资源被重定向到另外的URL
 305 请求必须使用代理来访问所请求的资源
+
+// 上传文件时，XMLHTTPRequest对象的upload属性有一个progress，会不断返回上传的进度。
+
+
+
+function get(type, url, data) {
+	return new Promise ((resolve,reject) => {
+		let req;
+		if (window.XMLHttpRequest) {
+			req = new XMLHttpRequest();
+		} else {
+			req = new ActiveXObject;
+		}
+
+		req.open(type, url, true);
+		req.onreadystatechange = (response) => {
+			if (response.readyState == 4) {
+				if (response.status == 200) {
+					resolve(response);
+				} else {
+					console.log(response.status);
+					reject(response);
+				}
+			} else {
+				reject(response);
+			}
+
+		}
+		if (type == 'get') {
+			// 遍历对象 ，形成URL
+		}
+		let reqData = '';
+		if (type == 'post') {
+			reqData = data;
+		}
+		req.send(reqData);
+	
+
+
+	})
+}
