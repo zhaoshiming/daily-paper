@@ -97,10 +97,10 @@ let obj = {name: 'tomas'};
 Object.keys(obj); // 会返回一个包含全部键值的数组
 
 遍历对象的全部属性
-Object.keys(obj).map(res=>{
+Object.keys(obj).map(res=>{   //返回对象自身的属性，不返回继承的属性，会跳过不可遍历的属性，会遍历继承的属性
     console.log(obj['res']);
 })
-for (var a in obj) {    // 会跳过不可遍历的属性，会便利继承的属性
+for (var a in obj) {    // 会跳过不可遍历的属性，会遍历继承的属性
     console.log(obj[a]);
 }
 
