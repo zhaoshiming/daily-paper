@@ -110,3 +110,48 @@ function get(type, url, data) {
 
 	})
 }
+
+
+
+
+function get(type,url,param,data) {
+	return new Promise((resolve,reject) => {
+		let reqObj;
+		if (window.XMLHttpRequest) {
+			reqObj = new XMLHttpRequest();
+		} else {
+			reqObj = new ActiveXObject;
+		}
+
+		let curType = type.toUpperCase();
+		let sendedData = '';
+		if (curType == 'POST') {
+			sendedData = data;
+		}
+		if (curType == "GET") {
+			Object.keys(param).forEach((res) => {
+				
+			})
+		}
+
+		reqObj.open(curType, url, false);
+
+		reqObj.onreadystatechange = (res) => {
+			if (res.readyState == 4) {
+				if (res.status == 200) {
+					resolve(res);
+				} else {
+					reject(res);
+				}
+			} else {
+				reject(res)
+			}
+		}
+
+
+
+
+
+
+	})
+}
